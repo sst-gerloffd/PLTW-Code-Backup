@@ -14,11 +14,13 @@ spot_shape = "circle" # Possible shapes are: “arrow,” “turtle,” “circl
 spot_shapesize = 1.5
 score = 0 # Global variable that scores the current user score
 
+font_setup = ("Arial", 20, "normal")
+
 score_writer = turtle.Turtle() # Score display turtle and font setup
 score_writer.hideturtle()
 score_writer.penup()
 score_writer.goto(-350, 260)  # Move score_writer to top-left area of screen; adjust as needed
-score_writer.write(f"Score: {score}") # Initialize displayed score
+score_writer.write(f"Score: {score}", font=font_setup) # Initialize displayed score
 
 #-----countdown configuration-----
 timer = 30
@@ -28,7 +30,7 @@ counter = turtle.Turtle()
 counter.hideturtle()
 counter.penup()
 counter.goto(200, 260) 
-counter.write(timer)
+counter.write(timer, font=font_setup)
 
 #-----initialize turtle-----
 
@@ -60,17 +62,17 @@ def update_score():
     score += 1
     
     score_writer.clear() # erase previous score and write updated score
-    score_writer.write(f"Score: {score}")
+    score_writer.write(f"Score: {score}", font=font_setup)
     
 def countdown():
     global timer, timer_up
     counter.clear()
     if timer <= 0:
-        counter.write("Time's up!")
+        counter.write("Time's up!", font=font_setup)
         timer_up = True
         spot.hideturtle()
     else:
-        counter.write(timer)
+        counter.write(timer, font=font_setup)
         timer -= 1
         wn.ontimer(countdown, 1000) # schedule next call in 1000 ms (1 second)
 
@@ -80,3 +82,4 @@ spot.onclick(turtle_click)
 wn.ontimer(countdown, 1000)
 
 wn.mainloop()
+
