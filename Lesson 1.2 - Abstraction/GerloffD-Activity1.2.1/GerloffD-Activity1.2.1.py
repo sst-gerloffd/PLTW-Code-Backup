@@ -12,6 +12,12 @@ spot_shape = "circle" # Possible shapes are: “arrow,” “turtle,” “circl
 spot_shapesize = 1.5
 score = 0 # Global variable that scores the current user score
 
+score_writer = turtle.Turtle() # Score display turtle and font setup
+score_writer.hideturtle()
+score_writer.penup()
+score_writer.goto(-350, 260)  # Move score_writer to top-left area of screen; adjust as needed
+score_writer.write(f"Score: {score}") # Initialize displayed score
+
 #-----initialize turtle-----
 
 spot.fillcolor(spot_color)
@@ -30,12 +36,16 @@ def change_position():
     spot.penup()
     spot.goto(new_x,new_y) # Moves to new position.
     spot.pendown()
+    update_score()
 
 
-def update_global_score():
-  global score # This will update the global score.
-  score += 1
-  print(score)
+def update_score():
+    global score  # use the global score variable
+    score += 1
+    
+    # erase previous score and write updated score
+    score_writer.clear()
+    score_writer.write(f"Score: {score}")
     
 #-----events----------------
 
