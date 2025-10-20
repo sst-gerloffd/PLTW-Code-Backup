@@ -2,9 +2,13 @@
 #-----import statements-----
 
 import turtle
-import random as rand                                                           
+import random as rand
+import leaderboard as lb
 
 #-----game configuration----
+
+leaderboard_file_name = "leaderboard.txt"
+player_name = input ("Please enter your name:")
 
 wn = turtle.Screen()
 
@@ -23,7 +27,8 @@ score_writer.goto(-350, 260)  # Move score_writer to top-left area of screen; ad
 score_writer.write(f"Score: {score}", font=font_setup) # Initialize displayed score
 
 #-----countdown configuration-----
-timer = 30
+
+timer = 10
 timer_up = False
 
 counter = turtle.Turtle()
@@ -64,6 +69,23 @@ def update_score():
     score_writer.clear() # erase previous score and write updated score
     score_writer.write(f"Score: {score}", font=font_setup)
     
+def manage_leaderboard():
+
+  global score
+  global spot
+
+  # get the names and scores from the leaderboard file
+  leader_names_list = lb.get_names(leaderboard_file_name)
+  leader_scores_list = lb.get_scores(leaderboard_file_name)
+
+  # show the leaderboard with or without the current player
+  if (len(leader_scores_list) < 5 or score >= leader_scores_list[4]):
+    lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
+    lb.draw_leaderboard(True, leader_names_list, leader_scores_list, spot, score)
+
+  else:
+    lb.draw_leaderboard(False, leader_names_list, leader_scores_list, spot, score)
+
 def countdown():
     global timer, timer_up
     counter.clear()
@@ -71,10 +93,12 @@ def countdown():
         counter.write("Time's up!", font=font_setup)
         timer_up = True
         spot.hideturtle()
+        manage_leaderboard() 
     else:
         counter.write(timer, font=font_setup)
         timer -= 1
         wn.ontimer(countdown, 1000) # schedule next call in 1000 ms (1 second)
+
 
 #-----events----------------
 
