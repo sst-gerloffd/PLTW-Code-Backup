@@ -17,14 +17,15 @@ def get_names(file_name):
     leader_name = ""
     index = 0
 
-    # TODO 1: use a while loop to read the leader name from the line (format is "leader_name,leader_score")
+    while (line[index] != ","):
+      leader_name = leader_name + line[index] 
+      index = index + 1
 
-    # TODO 2: add the player name to the names list
+    names.append(leader_name)
 
   leaderboard_file.close()
-
   #  TODO 6: return the names list in place of the empty list
-  return []
+  return names
 
   
 # return scores from the leaderboard file
@@ -35,18 +36,17 @@ def get_scores(file_name):
   for line in leaderboard_file:
     leader_score = ""    
     index = 0
+        
+    while (line[index] != "\n"):
+      leader_score = leader_score + line[index]
+      index = index + 1
 
-    # TODO 3: use a while loop to index beyond the comma, skipping the player's name
+    scores.append(int(leader_score))
 
-    # TODO 4: use a while loop to get the score
-
-    # TODO 5: add the player score to the scores list
    
   leaderboard_file.close()
 
-  # TODO 7: return the scores in place of the empty list
-  return []
-
+  return scores
 
 # update leaderboard by inserting the current player and score to the list at the correct position
 def update_leaderboard(file_name, leader_names, leader_scores,  player_name, player_score):
