@@ -9,43 +9,52 @@ gold_score = 25
 # return names in the leaderboard file
 def get_names(file_name):
   leaderboard_file = open(file_name, "r")  # be sure you have created this
-
-  # use a for loop to iterate through the content of the file, one line at a time
-  # note that each line in the file has the format "leader_name,leader_score" for example "Pat,50"
   names = []
+  
   for line in leaderboard_file:
     leader_name = ""
     index = 0
 
-    while (line[index] != ","):
-      leader_name = leader_name + line[index] 
+    # read characters for the name until comma or end of line
+    while index < len(line) and line[index] != "," and line[index] != "\n":
+      leader_name = leader_name + line[index]
       index = index + 1
 
-    names.append(leader_name)
+    if leader_name != "":
+      names.append(leader_name)
 
+  print(names)
   leaderboard_file.close()
-  #  TODO 6: return the names list in place of the empty list
   return names
-
   
 # return scores from the leaderboard file
 def get_scores(file_name):
-  leaderboard_file = open(file_name, "r")  # be sure you have created this
-
+  leaderboard_file = open(file_name, "r")
   scores = []
+  
   for line in leaderboard_file:
-    leader_score = ""    
+    leader_score = ""
     index = 0
-        
-    while (line[index] != "\n"):
-      leader_score = leader_score + line[index]
-      index = index + 1
 
-    scores.append(int(leader_score))
+    # skip characters until after the comma
+    while index < len(line) and line[index] != ",":
+      index += 1
+      
+    # move past the comma if present
+    if index < len(line) and line[index] == ",":
+      index += 1
+      
+    # read characters for the score until end of line or newline
+    while index < len(line) and line[index] != "\n":
+      leader_score += line[index]
+      index += 1
 
-   
+    if leader_score != "":
+      scores.append(leader_score)
+
+
+  print(scores)
   leaderboard_file.close()
-
   return scores
 
 # update leaderboard by inserting the current player and score to the list at the correct position
