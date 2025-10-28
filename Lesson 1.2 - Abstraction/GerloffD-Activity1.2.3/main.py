@@ -2,6 +2,7 @@ import turtle as trtl
 import time
 
 #-----setup-----
+
 apple_image = "pear.gif"  # Store the file name of your shape
 
 wn = trtl.Screen()
@@ -10,9 +11,19 @@ wn.bgpic("background.gif")
 wn.addshape(apple_image)  # Make the screen aware of the new file
 wn.tracer(False)  # Turn off automatic updates for manual control
 
+drawer = trtl.Turtle()
 apple = trtl.Turtle()
 
+drawer.penup()
+drawer.hideturtle()
+
+apple.goto(0,0)
+
 #-----functions-----
+
+def draw_an_A():
+  apple_fall(apple)
+  
 def draw_apple(active_apple):
     active_apple.shape(apple_image)
     wn.update()
@@ -33,7 +44,15 @@ def apple_fall(active_apple):
         time.sleep(0.05) # small delay so motion is visible
 
 #-----function calls-----
+
 draw_apple(apple)
-apple_fall(apple)
+
+drawer.goto(-18,-40)
+
+drawer.color("white")
+drawer.write("A", font=("Arial", 55, "bold")) 
+
+wn.onkeypress(draw_an_A, "a")
+wn.listen()
 
 wn.mainloop()
