@@ -32,8 +32,9 @@ def apple_fall(active_apple):
     counter = 0
     new_x = active_apple.xcor()
     new_y = active_apple.ycor()
-
-    while new_y > -170:  # stop lower so you can see it
+    
+    if active_apple.ycor() != -170:
+      while new_y > -170:  # stop lower so you can see it
         counter += 1  # simulate acceleration
         new_y -= counter
 
@@ -42,6 +43,9 @@ def apple_fall(active_apple):
 
         wn.update()      # refresh the screen each move
         time.sleep(0.05) # small delay so motion is visible
+      else:
+        drawer.clear()
+    
 
 #-----function calls-----
 
