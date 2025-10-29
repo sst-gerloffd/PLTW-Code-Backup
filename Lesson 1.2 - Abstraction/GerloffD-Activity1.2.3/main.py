@@ -45,6 +45,8 @@ def apple_fall(active_apple):
         time.sleep(0.05) # small delay so motion is visible
       else:
         drawer.clear()
+        active_apple.hideturtle()        
+        wn.update()
     
 
 #-----function calls-----
