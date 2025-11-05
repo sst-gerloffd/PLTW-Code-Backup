@@ -1,9 +1,21 @@
-Loop_counter equal to ‘x’ amount
+Set num_walls to desired number of spiral walls
+Set path_width to desired distance between walls
+Set wall_color to desired turtle pen color
+Set door_offset to 10
+Set door_width to path_width
 
-While loop_counter doesn’t equal target:
-	Turtle go forward 10 steps
-	Turtle turn right 90 degrees
-	Step_amount plus 10 steps
-	Degrees_amount plus 90
-	
-Loop_counter plus and is equal to 1
+Create turtle
+Set turtle pen color to wall_color
+Set turtle speed to fastest
+Set step_amount to path_width
+Set loop_counter to 0
+
+While loop_counter doesn’t equal num_walls:
+    Turtle go forward door_offsets
+    Lift pen up                            
+    Turtle go forward door_width
+    Put pen down                          
+    Turtle go forward (step_amount - door_offset - door_width)
+    Turtle turn right 90 degrees
+    Increase step_amount by path_width
+    Increase loop_counter by 1
