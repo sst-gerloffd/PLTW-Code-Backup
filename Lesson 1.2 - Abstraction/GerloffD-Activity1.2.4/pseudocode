@@ -11,8 +11,13 @@ Set step_amount to path_width
 Set loop_counter to 0
 
 While loop_counter doesn’t equal num_walls:
-    Turtle go forward door_offsets
+    Turtle go forward half of door_offsets
+    Turtle turn left by 90 degrees
+    Turtle go forward path_width
     Lift pen up                            
+    Turtle go backward path_width
+    Turtle turn left by 90 degrees
+    Turtle go forward remaining half of door_offsets
     Turtle go forward door_width
     Put pen down                          
     Turtle go forward (step_amount - door_offset - door_width)
