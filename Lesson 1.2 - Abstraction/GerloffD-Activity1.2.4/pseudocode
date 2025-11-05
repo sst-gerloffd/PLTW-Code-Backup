@@ -1,0 +1,9 @@
+Loop_counter equal to ‘x’ amount
+
+While loop_counter doesn’t equal target:
+	Turtle go forward 10 steps
+	Turtle turn right 90 degrees
+	Step_amount plus 10 steps
+	Degrees_amount plus 90
+	
+Loop_counter plus and is equal to 1
