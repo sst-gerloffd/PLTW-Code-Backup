@@ -1,14 +1,19 @@
 import turtle, random
 
 # --- setup ---
+
 t = turtle.Turtle()
-t.pensize(2)
+t.pensize(4)
 t.speed(0)
 t.pencolor("black")
 
-num_walls = 25      # number of walls in the spiral
+num_walls = 30      # number of walls in the spiral
 path_width = 20     # space between each wall
 step = path_width   # how far each wall extends
+barrier_length = path_width + 20
+
+
+# --- maze setup ---
 
 for i in range(num_walls):
     # draw first few walls with no doors or barriers
@@ -40,18 +45,19 @@ for i in range(num_walls):
     if first == "door":
         t.penup(); t.forward(path_width); t.pendown()       # draw door (gap)
     else:
-        t.left(90); t.forward(40); t.backward(40); t.right(90)  # draw barrier
+        t.left(90); t.forward(barrier_length); t.backward(barrier_length); t.right(90)  # draw barrier
 
     # move to second item
     t.forward(second_pos - first_pos - path_width)
     if second == "door":
         t.penup(); t.forward(path_width); t.pendown()
     else:
-        t.left(90); t.forward(40); t.backward(40); t.right(90)
+        t.left(90); t.forward(barrier_length); t.backward(barrier_length); t.right(90)
 
     # finish rest of the wall and turn
     t.forward(step - second_pos - path_width)
     t.right(90)
     step += path_width
+
 
 turtle.done()
