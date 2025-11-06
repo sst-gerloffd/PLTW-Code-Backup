@@ -1,44 +1,57 @@
-import turtle
+import turtle, random
 
-num_walls = 25
-path_width = 20
-wall_color = "black"
-door_offset = 10
-door_width = path_width
-barrier_offset = 40
-barrier_length = path_width
-
+# --- setup ---
 t = turtle.Turtle()
 t.pensize(2)
 t.speed(0)
-t.pencolor(wall_color)
+t.pencolor("black")
 
-loop_counter = 0
-step_amount = path_width
+num_walls = 25      # number of walls in the spiral
+path_width = 20     # space between each wall
+step = path_width   # how far each wall extends
 
-while loop_counter < num_walls:
-    if loop_counter < 5:
+for i in range(num_walls):
+    # draw first few walls with no doors or barriers
+    if i < 5:
         t.penup()
-        t.forward(step_amount)
+        t.forward(step)
         t.right(90)
-        step_amount += path_width
-        loop_counter += 1
+        step += path_width
         continue
 
-    t.forward(door_offset)
-    t.penup()
-    t.forward(door_width)
-    t.pendown()
+    # pick random spots for door and barrier
+    door = random.randint(10, step - 30)
+    barrier = random.randint(10, step - 30)
 
-    t.forward(barrier_offset)
-    t.left(90)
-    t.forward(40)
-    t.backward(40)
-    t.right(90)
+    # make sure they aren’t too close together
+    while abs(door - barrier) < 25:
+        barrier = random.randint(10, step - 30)
 
-    t.forward(step_amount - door_offset - door_width - barrier_offset)
+    # figure out which comes first
+    if door < barrier:
+        first, second = "door", "barrier"
+        first_pos, second_pos = door, barrier
+    else:
+        first, second = "barrier", "door"
+        first_pos, second_pos = barrier, door
+
+    # move to first item
+    t.forward(first_pos)
+    if first == "door":
+        t.penup(); t.forward(path_width); t.pendown()       # draw door (gap)
+    else:
+        t.left(90); t.forward(40); t.backward(40); t.right(90)  # draw barrier
+
+    # move to second item
+    t.forward(second_pos - first_pos - path_width)
+    if second == "door":
+        t.penup(); t.forward(path_width); t.pendown()
+    else:
+        t.left(90); t.forward(40); t.backward(40); t.right(90)
+
+    # finish rest of the wall and turn
+    t.forward(step - second_pos - path_width)
     t.right(90)
-    step_amount += path_width
-    loop_counter += 1
+    step += path_width
 
 turtle.done()
