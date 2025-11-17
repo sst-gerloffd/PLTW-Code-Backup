@@ -3,7 +3,16 @@ import turtle
 import clicker
 import ui
 import upgrades
+import random
 
+# === secret === #
+
+# albert_image_chance = random.randint(0, 10)
+albert_image_chance = 1
+if albert_image_chance == 1:
+    albert_image = "emre.gif"
+else:
+    albert_image = "albert.gif"
 
 # === setup === #
 screen = turtle.Screen()
@@ -12,7 +21,6 @@ total_alberts = 0
 current_alberts = 0
 current_score_font = ("roboto", 18, "bold")
 
-albert_image = "albert.gif"
 screen = turtle.Screen()
 
 screen.addshape(albert_image)
