@@ -1,6 +1,10 @@
 import turtle
 
-def click(x, y, alberts_per_click, current_alberts, total_alberts):
-    current_alberts += alberts_per_click
-    total_alberts += alberts_per_click
-    return current_alberts, total_alberts
+def initialize_ui(screen, font, current_alberts):
+    drawer = turtle.Turtle()
+    drawer.penup()
+    drawer.hideturtle()
+    drawer.goto(200, 200)
+    drawer.write(f"Score: {current_alberts}", align="center", font=font)
+    screen.update()
+    return drawer
