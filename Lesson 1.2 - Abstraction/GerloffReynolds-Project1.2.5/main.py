@@ -23,10 +23,10 @@ upgrades_list = [
     {"name": "Click Power", "cost": str(upgrades.click_upgrade.cost()), "description": "+1 per click"},
 ]
 
-ui.draw_upgrades_sidebar(screen, upgrades_list)
 
 # Initialize UI and store the drawer object
 current_score_drawer = ui.initialize_ui(screen, current_score_font, current_alberts)
+ui.draw_upgrades_sidebar(screen, upgrades_list)
 
 # === Run Game === #
 def handle_click(x, y):
